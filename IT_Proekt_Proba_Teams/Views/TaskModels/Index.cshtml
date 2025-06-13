@@ -1,0 +1,209 @@
+﻿@model IEnumerable<IT_Proekt_Proba_Teams.Models.TaskModel>
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Листа на задачи";
+}
+
+<h2>Мои Задачи</h2>
+
+@if (!User.IsInRole("Administrator"))
+{
+    <p>
+        @Html.ActionLink("Креирај Нова Задача", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+}
+
+<hr />
+
+<h3>Активни Задачи</h3>
+@if (!Model.Any(t => !t.IsCompleted))
+{
+    <p class="alert alert-info">Немате активни задачи.</p>
+}
+else
+{
+    <table class="table" id="activeTasksTable">
+        <thead>
+            <tr>
+                <th>Заврши</th>
+                <th>Наслов</th>
+                <th>Креатор</th>
+                <th>Приоритет</th>
+                <th>Рок</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(t => !t.IsCompleted))
+            {
+                string rowClass = "";
+                string dueDateClass = "";
+
+                switch (item.Priority)
+                {
+                    case "Critical": rowClass = "priority-critical"; break;
+                    case "High": rowClass = "priority-high"; break;
+                    case "Medium": rowClass = "priority-medium"; break;
+                    case "Low": rowClass = "priority-low"; break;
+                }
+                if (item.DueDate < DateTime.Today)
+                {
+                    dueDateClass += "due-date-overdue";
+                }
+
+                <tr>
+                    <td>
+                        <input type="checkbox" class="task-completed-checkbox" data-task-id="@item.Id" />
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@(item.CreatedByUser != null ? item.CreatedByUser.Email : "N/A")</td>
+                    <td class="@rowClass">@Html.DisplayFor(modelItem => item.Priority)</td>
+                    <td class="@dueDateClass">@item.DueDate.ToString("dd.MM.yyyy")</td>
+                    <td>
+                        @if (User.IsInRole("Administrator") ||
+                            (User.IsInRole("TeamLeader") && item.Team != null && item.Team.TeamLeaderId == User.Identity.GetUserId()) ||
+                            item.CreatedByUserId == User.Identity.GetUserId() ||
+                            item.AssignedToUserId == User.Identity.GetUserId())
+                        {
+                            @Html.ActionLink("Уреди", "Edit", new { id = item.Id }) @:|
+                            @Html.ActionLink("Детали", "Details", new { id = item.Id }) @:|
+                            @Html.ActionLink("Избриши", "Delete", new { id = item.Id })
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<hr />
+
+<h3>Завршени Задачи</h3>
+@if (!Model.Any(t => t.IsCompleted))
+{
+    <p class="alert alert-info">Немате завршени задачи.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Наслов</th>
+                <th>Заврши</th>
+                <th>Креатор</th>
+                <th>Тим</th>
+                <th>Приоритет</th>
+                <th>Рок</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(t => t.IsCompleted)) 
+            {
+                string rowClass = "task-completed";
+                string dueDateClass = ""; 
+
+                <tr class="@rowClass">
+                    <td>
+                        <input type="checkbox" checked disabled />
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@(item.CreatedByUser != null ? item.CreatedByUser.Email : "N/A")</td>
+                    <td>@(item.Team != null ? item.Team.Name : "N/A")</td>
+                    <td>@Html.DisplayFor(modelItem => item.Priority)</td>
+                    <td class="@dueDateClass">@Html.DisplayFor(modelItem => item.DueDate)</td>
+                    <td>
+                        @if (User.IsInRole("Administrator") ||
+                            (User.IsInRole("TeamLeader") && item.Team != null && item.Team.TeamLeaderId == User.Identity.GetUserId()) ||
+                            item.CreatedByUserId == User.Identity.GetUserId() ||
+                            item.AssignedToUserId == User.Identity.GetUserId())
+                        {
+                            @Html.ActionLink("Детали", "Details", new { id = item.Id }) @:|
+                            @Html.ActionLink("Избриши", "Delete", new { id = item.Id })
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    <script>
+        setTimeout(() => {
+            $('.dataTables_paginate .pagination a').css({
+                'margin-right': '4px'
+            });
+        },10)
+        $(document).ready(function () {
+            var table = $("#activeTasksTable").DataTable({
+                lengthMenu: [5, 10, 25, 50],
+                columnDefs: [
+                    {
+                        targets: 4,
+                        type: 'date-eu',
+                        render: function (data, type, row) {
+                            if (type === 'sort' || type === 'type') {
+                                var parts = data.split('.');
+                                return new Date(parts[2], parts[1] - 1, parts[0]).getTime();
+                            }
+                            return data;
+                        }
+                    },
+                    {
+                        targets: 3,
+                        type: 'priority-sort',
+                        render: function (data, type, row) {
+                            if (type === 'sort') {
+                                var priorityOrder = { 'Critical': 1, 'High': 2, 'Medium': 3, 'Low': 4 };
+                                return priorityOrder[data] || 3;
+                            }
+                            return data;
+                        }
+                    }
+                ],
+                order: [[4, 'asc']],
+            });
+
+            table.on('draw', function () {
+                $('.dataTables_paginate .pagination a').css({
+                    'margin-right': '4px'
+                });
+            });
+        });
+        
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#activeTasksTable').on('change', '.task-completed-checkbox', function () {
+                var taskId = $(this).data('task-id');
+                var isCompleted = $(this).is(':checked');
+                var $checkbox = $(this);
+
+                $.ajax({
+                    url: '@Url.Action("MarkTaskAsCompleted", "TaskModels")',
+                    type: 'POST',
+                    data: {
+                        id: taskId,
+                        isCompleted: isCompleted,
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            alert("Состојбата на задачата успешно ажурирана!");
+                            window.location.reload();
+                        } else {
+                            alert('Настана грешка при ажурирање на задачата: ' + result.message);
+                            $checkbox.prop('checked', !isCompleted);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Грешка при комуникација со серверот: ' + error + ". Детали: " + xhr.responseText);
+                        $checkbox.prop('checked', !isCompleted);
+                    }
+                });
+            });
+        });
+    </script>
+}

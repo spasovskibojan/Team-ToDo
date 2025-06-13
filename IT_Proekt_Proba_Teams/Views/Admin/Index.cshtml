@@ -1,0 +1,74 @@
+﻿@model IT_Proekt_Proba_Teams.Models.AdminDashboardViewModel
+
+@{
+    ViewBag.Title = "Администраторски Панел";
+}
+
+<h2 class="text-center py-4 mb-4 rounded shadow-sm">Администраторски Панел - Статистики</h2>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card text-bg-primary h-100 shadow">
+            <div class="card-header border-bottom border-white border-opacity-25">
+                <h3 class="card-title h5 mb-0">Вкупен Број на Корисници</h3>
+            </div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <h1 class="display-4 fw-bold mb-0">@Model.TotalUsers</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-info h-100 shadow">
+            <div class="card-header border-bottom border-white border-opacity-25">
+                <h3 class="card-title h5 mb-0">Вкупен Број на Тимови</h3>
+            </div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <h1 class="display-4 fw-bold mb-0">@Model.TotalTeams</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-warning h-100 shadow">
+            <div class="card-header border-bottom border-white border-opacity-25">
+                <h3 class="card-title h5 mb-0">Вкупен Број на Задачи</h3>
+            </div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <h1 class="display-4 fw-bold mb-0">@Model.TotalTasks</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card text-bg-danger h-100 shadow">
+            <div class="card-header border-bottom border-white border-opacity-25">
+                <h3 class="card-title h5 mb-0">Активни Задачи</h3>
+            </div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <h1 class="display-4 fw-bold mb-0">@Model.TotalActiveTasks</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-success h-100 shadow">
+            <div class="card-header border-bottom border-white border-opacity-25">
+                <h3 class="card-title h5 mb-0">Завршени Задачи</h3>
+            </div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <h1 class="display-4 fw-bold mb-0">@Model.TotalCompletedTasks</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-secondary h-100 shadow">
+            <div class="card-header border-bottom border-white border-opacity-25">
+                <h3 class="card-title h5 mb-0">Улоги на Корисници</h3>
+            </div>
+            <div class="card-body py-4">
+                <p class="card-text fs-5">Тим Лидери: <strong class="text-white">@Model.TotalTeamLeaders</strong></p> 
+                <p class="card-text fs-5 mb-0">Вработени: <strong class="text-white">@Model.TotalEmployees</strong></p>
+            </div>
+        </div>
+    </div>
+</div>

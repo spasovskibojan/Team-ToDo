@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task Manager MVC APP", "IT_Proekt_Proba_Teams\Task Manager MVC APP.csproj", "{D714D5D4-CF02-4A3A-848A-0DD1E5DCFAFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D714D5D4-CF02-4A3A-848A-0DD1E5DCFAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D714D5D4-CF02-4A3A-848A-0DD1E5DCFAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D714D5D4-CF02-4A3A-848A-0DD1E5DCFAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D714D5D4-CF02-4A3A-848A-0DD1E5DCFAFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3CD00AAE-BBEF-4B82-87A1-E958C4C30DE5}
+	EndGlobalSection
+EndGlobal

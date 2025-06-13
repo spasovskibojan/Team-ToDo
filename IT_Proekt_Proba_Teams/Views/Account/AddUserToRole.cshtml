@@ -1,0 +1,19 @@
+﻿@model IT_Proekt_Proba_Teams.Models.AddToRoleModel
+@{
+    ViewBag.Title = "AddUserToRole";
+}
+
+<h2>Додели улога на корисникот:</h2>
+
+@using (Html.BeginForm("AddUserToRole", "Account"))
+{
+    <div class="form-group mb-2">
+        Е-адреса
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.DropDownListFor(z => z.SelectedRole, new SelectList(Model.Roles), new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Зачувај</button>
+}
+

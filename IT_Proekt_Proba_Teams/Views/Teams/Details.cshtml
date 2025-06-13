@@ -1,0 +1,66 @@
+﻿@model IT_Proekt_Proba_Teams.Models.Team
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детали</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Тим лидер
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamLeader.Email)
+        </dd>
+
+        <dt>
+            Тим
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+<h3>Членови на Тимот:</h3>
+@if (Model.Members != null && Model.Members.Any())
+{
+    <ul>
+        @foreach (var member in Model.Members)
+        {
+            <li>
+                @member.Email
+                @if (User.IsInRole("TeamLeader") && Model.TeamLeaderId == User.Identity.GetUserId() && member.Id != Model.TeamLeaderId)
+                {
+                    using (Html.BeginForm("RemoveMemberFromTeam", "Teams", FormMethod.Post, new { style = "display:inline;" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("teamId", Model.Id)
+                        @Html.Hidden("memberId", member.Id)
+                        <button type="submit" class="btn btn-link" onclick="return confirm('Дали сте сигурни дека сакате да го отстраните овој член?');">Отстрани</button>
+                    }
+                }
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Нема членови во овој тим (освен лидерот).</p>
+}
+@if (User.IsInRole("TeamLeader") && Model.TeamLeaderId == User.Identity.GetUserId())
+{
+    @Html.ActionLink("Додај нов член на тимот", "InsertNewTeamMember", new { teamId = Model.Id }, new { @class = "btn btn-success" })
+}
+<p>
+    @if (User.IsInRole("TeamLeader"))
+    {
+
+        @Html.ActionLink("Уреди", "Edit", new { id = Model.Id }) @:|
+    }
+    @Html.ActionLink("Назад до листата", "Index")
+</p>

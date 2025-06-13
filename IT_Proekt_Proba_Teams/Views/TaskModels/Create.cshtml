@@ -1,0 +1,76 @@
+﻿@model IT_Proekt_Proba_Teams.Models.TaskModel
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Креирај Задача";
+}
+
+<h2>Креирај Задача</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TaskModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.CreatedByUserId)
+        @Html.HiddenFor(model => model.TeamId)
+        @Html.HiddenFor(model => model.IsCompleted)
+
+        <div class="form-group">
+            Наслов
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Приоритет
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Priority, ViewBag.Priority as SelectList, "Одбери Приоритет", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Рок
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Забелешки
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (User.IsInRole("TeamLeader"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.AssignedToUserId, "Додели на", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.AssignedToUserId, ViewBag.AssignedToUserId as SelectList, "Додели на себе", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AssignedToUserId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Креирај" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад кон листата", "Index")
+</div>

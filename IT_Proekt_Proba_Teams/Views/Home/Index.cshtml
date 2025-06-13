@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Добредојдовте во Работната табла!";
+}
+
+<main>
+    <section class="row mb-5 text-center" aria-labelledby="appWelcomeTitle">
+        <div class="col-12">
+            <h1 id="appWelcomeTitle" class="display-4 text-primary">Упатство за користење на апликацијата!</h1>
+            <p class="lead">Вашата сеопфатна апликација за менаџирање и делегирање на задачи во тимови.</p>
+            <p class="lead">Организирајте ја вашата работа ефикасно и соработувајте со вашиот тим.</p>
+        </div>
+    </section>
+
+    <div class="row mb-5">
+        <section class="col-md-6 mb-4" aria-labelledby="keyFeaturesTitle">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 id="keyFeaturesTitle" class="card-title h4 mb-0">Клучни Функционалности</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Менаџирање задачи:</strong> Лесно креирајте, прегледувајте, менувајте и бришете задачи.</li>
+                        <li class="list-group-item"><strong>Делегирање:</strong> Тим Лидерите можат да делегираат задачи на членовите на нивните тимови.</li>
+                        <li class="list-group-item"><strong>Приоритети:</strong> Поставете приоритети (Critical, High, Medium, Low) за визуелно истакнување.</li>
+                        <li class="list-group-item"><strong>Крајни рокови:</strong> Следете ги Due Dates; изминатите рокови се визуелно означени.</li>
+                        <li class="list-group-item"><strong>Завршување задачи:</strong> Означете ги задачите како завршени со еден клик.</li>
+                        <li class="list-group-item"><strong>Управување со тимови:</strong> Креирајте и менаџирајте тимови со Тим Лидери и Вработени.</li>
+                        <li class="list-group-item"><strong>Улоги:</strong> Јасни улоги со специфични дозволи (Администратор, Тим Лидер, Вработен).</li>
+                        <li class="list-group-item"><strong>Интуитивен приказ:</strong> Користење на DataTables за филтрирање и сортирање на задачите.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="col-md-6 mb-4" aria-labelledby="userRolesTitle">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h2 id="userRolesTitle" class="card-title h4 mb-0">Кориснички Улоги</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Администратор:</strong> Има целосен пристап до системот. Може да ги види сите статистики (корисници, тимови, задачи) и да управува со корисничките улоги. Администраторите не креираат задачи директно.
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Тим Лидер:</strong>
+                            <ul>
+                                <li>Креира свој тим и автоматски станува негов лидер.</li>
+                                <li>Може да додава и отстранува Вработени во својот тим.</li>
+                                <li>Креира задачи за себе или ги делегира на вработени во неговиот тим.</li>
+                                <li>Има поглед кон сите задачи поставени во неговиот тим.</li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Вработен (Employee):</strong>
+                            <ul>
+                                <li>Може да креира сопствени лични задачи.</li>
+                                <li>Ги прегледува задачите што му биле делегирани од неговиот Тим Лидер.</li>
+                                <li>Ако не е во тим, може да креира нов тим (и да стане Тим Лидер).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="row mb-5" aria-labelledby="howToTitle">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h2 id="howToTitle" class="card-title h4 mb-0">Како да ја користите апликацијата:</h2>
+                </div>
+                <div class="card-body">
+                    <ol class="list-group list-group-flush list-group-numbered">
+                        <li class="list-group-item">
+                            <strong>Регистрација:</strong> Прво, <a href="@Url.Action("Register", "Account")">регистрирајте се</a> на платформата. Сите нови корисници стандардно добиваат улога "Вработен".
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Креирање Тим (само за Вработени без тим):</strong> Ако сте Вработен без тим, можете да креирате свој тим. Одете на "Тимови" во навигацијата и кликнете "Креирај Тим". Потоа, автоматски ќе станете Тим Лидер на тој тим.
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Додавање Членови во Тим (само за Тим Лидери):</strong> Како Тим Лидер, одете на "Тимови", кликнете на детали за вашиот тим, и таму ќе најдете опција да додавате нови членови по нивна е-пошта.
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Креирање Задача:</strong>
+                            <ul>
+                                <li>За Вработени: Одете на "Задачи", кликнете "Креирај Нова Задача" и креирајте лична задача.</li>
+                                <li>За Тим Лидери: Одете на "Задачи", кликнете "Креирај Нова Задача". Ќе имате опција да ја доделите задачата на себе или да ја делегирате на член од вашиот тим.</li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Менаџирање Задачи:</strong> На страницата "Задачи", можете да ги прегледувате вашите задачи (активни и завршени).
+                            <ul>
+                                <li>Заврши задача: Кликнете на checkbox-от на почетокот на редот.</li>
+                                <li>Измени/Детали/Избриши: Користете ги опциите на крајот на редот.</li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Администраторски Панел (само за Администратори):</strong> Ако сте Администратор, можете да пристапите до "Работна Табла" и "Кориснички улоги" од навигацијата за да видите статистики и да управувате со улогите на корисниците.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="row mb-4 text-center">
+        <div class="col-12">
+            <p>Имате прашања или ви е потребна помош? Контактирајте го вашиот тим лидер или администратор.</p>
+            <a href="@Url.Action("Contact", "Home")" class="btn btn-secondary">Контактирајте не</a>
+        </div>
+    </section>
+</main>

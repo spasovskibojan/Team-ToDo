@@ -1,0 +1,78 @@
+﻿@model IT_Proekt_Proba_Teams.Models.TaskModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детали</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Наслов
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            Креирано од
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedByUser.Email)
+        </dd>
+
+        <dt>
+            Тим
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Team.Name)
+        </dd>
+
+
+        <dt>
+            Приоритет
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+
+        <dt>
+            Рок
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            Забелешки
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            Активна
+        </dt>
+        @if (Model.IsCompleted == true)
+        {
+            <dd>Да</dd>
+        }
+        else
+        {
+            <dd>Не</dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Уреди", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Назад до листата", "Index")
+</p>

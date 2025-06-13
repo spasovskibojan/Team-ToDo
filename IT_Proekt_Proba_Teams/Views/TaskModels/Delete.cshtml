@@ -1,0 +1,88 @@
+﻿@model IT_Proekt_Proba_Teams.Models.TaskModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Бришење</h2>
+
+<h3>Дали си сигурен дека сакаш да ја избришеш задачата?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Наслов
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            Доделена на
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignedToUser.Email)
+        </dd>
+
+        <dt>
+            Креирана од
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedByUser.Email)
+        </dd>
+        <dt>
+            Тим
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.Name)
+        </dd>
+        <dt>
+            Приоритет
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+
+        <dt>
+            Рок
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            Забелешки
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            Активна
+        </dt>
+
+        @if (!Model.IsCompleted == true)
+        {
+            <dd>Да</dd>
+        }
+        else
+        {
+            <dd>Не</dd>
+        }
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Назад до листата", "Index")
+        </div>
+    }
+</div>
