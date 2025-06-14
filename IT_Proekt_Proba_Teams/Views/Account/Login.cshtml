@@ -33,11 +33,12 @@
                         <div class="offset-md-2 col-md-10">
                             <div class="checkbox">
                                 Зачувај
+                                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="offset-md-2 col-md-10">
+                        <div class="offset-md-2 col-md-10 mt-2">
                             <input type="submit" value="Најава" class="btn btn-outline-dark" />
                         </div>
                     </div>
