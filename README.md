@@ -34,7 +34,7 @@ A comprehensive web application for managing and delegating tasks within teams. 
 
 1.  **Backend:** C# .NET Framework (ASP.NET MVC with Razor Views)
 2.  **Database:** SQL Server (LocalDB/Express for development)
-3.  **Frontend (Rendered):** HTML, CSS (via CSHTML), JavaScript (jQuery, DataTables.js)
+3.  **Frontend (Rendered):** HTML, CSS, Bootstrap (via CSHTML), JavaScript (jQuery, DataTables.js)
 
 ## 💻 Local Installation
 1.   **Visual Studio: **Download and open Visual Studio 2022
