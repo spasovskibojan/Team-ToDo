@@ -37,11 +37,13 @@ A comprehensive web application for managing and delegating tasks within teams. 
 3.  **Frontend (Rendered):** HTML, CSS (via CSHTML), JavaScript (jQuery, DataTables.js)
 
 ## 💻 Local Installation
+1.   **Visual Studio: **Download and open Visual Studio 2022
+2.   **Database: **Install SQL Server LocalDB
+3.   **Open in Visual Studio: ** Get Started -> Clone a repository, Repository location: https://github.com/spasovskibojan/Team-ToDo.git -> Clone
+4.   **Web config: **Solution Explorer -> web.config, change <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-IT_Proekt_Proba_Teams-20250607122401.mdf;Initial Catalog=aspnet-IT_Proekt_Proba_Teams-20250607122401;Integrated Security=True" providerName="System.Data.SqlClient" /> to <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ITProektProbaTeamsDB;Integrated Security=True" providerName="System.Data.SqlClient" />
+5.   **Package Manager Console: **type: Update-Package -Reinstall, if it fails type Install-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform and submit all the notes.
+6.   **Database check: **View -> Server Explorer, if the DefaultConnection (Task Manager MVC APP) exists, go to Tables and right click -> Show Table Data on AspNetRoles, and add rows with this data: Id:1 && Name:Administrator, Id:2 && Name:TeamLeader, Id:3 && Name:Employee/
+7.   **Run: **Run the app and follow the instructions on the homepage
 
-1.  **Clone:** `git clone https://github.com/your-username/your-repo-name.git`
-2.  **Open in Visual Studio:** Open the `.sln` file.
-3.  **Restore NuGet Packages.**
-4.  **Database:** Ensure SQL Server LocalDB/Express is installed. Update `Web.config` connection string. Run `Update-Database` in Package Manager Console if using Code First Migrations.
-5.  **Run:** Press `F5` in Visual Studio.
 
 ---
